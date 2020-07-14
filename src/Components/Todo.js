@@ -22,6 +22,10 @@ const useStyles = makeStyles({
   buttonColor: {
     background: '#673ab7',
     color: 'white',
+    width: '20%',
+  },
+  form: {
+    display: 'inline-block',
   },
 });
 
@@ -32,8 +36,11 @@ const Todo = (props) => {
       <List className={classes.list}>
         <ListItem>
           <ListItemText>
-            <Checkbox></Checkbox>
-            {props.task}
+            <form className={classes.form}>
+              <Checkbox id={props.id}></Checkbox>
+            </form>
+
+            {props.name}
             <Divider className={classes.divMargin} />
             <Box className={classes.buttonBox}>
               <Button variant='contained' className={classes.buttonColor}>

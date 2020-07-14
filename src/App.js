@@ -1,7 +1,7 @@
 import React from 'react';
 import Todo from './Components/Todo';
 import Typography from '@material-ui/core/Typography';
-import InputTasks from './Components/InputTasks';
+import Form from './Components/Form';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/styles';
 
@@ -19,8 +19,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function App() {
+export default function App(props) {
   const classes = useStyles();
+  //rendering components iteratively
+  const taskList = props.tasks.map((task) => (
+    <Todo id={task.id} name={task.name} />
+  ));
   return (
     <Container maxWidth='md' className={classes.root}>
       <div className='App'>
@@ -30,13 +34,11 @@ export default function App() {
         <Typography variant='h4' align='center' className={classes.h4}>
           What needs to be done?
         </Typography>
-        <InputTasks></InputTasks>
+        <Form />
         <Typography variant='h3' align='center' className={classes.h3}>
           3 tasks remaining
         </Typography>
-        <Todo task='Eat'></Todo>
-        <Todo task='Sleep'></Todo>
-        <Todo task='Repeat'></Todo>
+        {taskList}
       </div>
     </Container>
   );

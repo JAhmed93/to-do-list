@@ -1,12 +1,15 @@
-import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import { withStyles } from '@material-ui/core/styles';
 
-export default function Checkboxes() {
-  //   const [checked, setChecked] = React.useState(true);
+const checkBoxStyles = (theme) => ({
+  root: {
+    '&$checked': {
+      color: '#673ab7',
+    },
+  },
+  checked: {},
+});
 
-  //   const handleChange = (event) => {
-  //     setChecked(event.target.checked);
-  //   };
+const CustomCheckbox = withStyles(checkBoxStyles)(Checkbox);
 
-  return <Checkbox inputProps={{ 'aria-label': 'uncontrolled-checkbox' }} />;
-}
+export default CustomCheckbox;

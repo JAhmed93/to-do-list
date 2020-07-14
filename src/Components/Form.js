@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,29 +41,31 @@ export default function LayoutTextFields() {
 
   return (
     <div className={classes.root}>
-      <TextField
-        className={classes.textField}
-        id='standard-full-width'
-        label='Input a task'
-        style={{ margin: 8 }}
-        fullWidth
-        margin='normal'
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <Button
-        variant='contained'
-        color='primary'
-        className={classes.inputButton}
-      >
-        Add
-      </Button>
-      <Box className={classes.boxStyle}>
-        <Button className={classes.boxButtons}>All</Button>
-        <Button className={classes.boxButtons}>Active</Button>
-        <Button className={classes.boxButtons}>Completed</Button>
-      </Box>
+      <form className={classes.root}>
+        <TextField
+          className={classes.textField}
+          id='standard-full-width'
+          label='Input a task'
+          style={{ margin: 8 }}
+          fullWidth
+          margin='normal'
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <Button
+          variant='contained'
+          color='primary'
+          className={classes.inputButton}
+        >
+          Add
+        </Button>
+        <Box className={classes.boxStyle}>
+          <Button className={classes.boxButtons}>All</Button>
+          <Button className={classes.boxButtons}>Active</Button>
+          <Button className={classes.boxButtons}>Completed</Button>
+        </Box>
+      </form>
     </div>
   );
 }
