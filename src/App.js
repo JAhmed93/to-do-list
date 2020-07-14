@@ -1,88 +1,43 @@
 import React from 'react';
+import Todo from './Components/Todo';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import InputTasks from './Components/InputTasks';
 import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
-import 'fontsource-roboto';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    marginTop: '3rem',
+    padding: '2rem',
   },
-}));
+  h1: {
+    margin: '2rem',
+  },
+  h4: {
+    margin: '1.5rem',
+  },
+});
 
 export default function App() {
   const classes = useStyles();
   return (
-    <div className='App'>
-      <Container maxWidth='md'>
-        <Typography align='center' variant='h1'>
-          Hello World!
+    <Container maxWidth='md' className={classes.root}>
+      <div className='App'>
+        <Typography variant='h1' align='center' className={classes.h1}>
+          TodoMatic
         </Typography>
-        <FormControl fullWidth='true'>
-          <Typography variant='h2' align='center'>
-            <label htmlFor='new-todo-input' className='label__lg'>
-              What needs to be done?
-            </label>
-          </Typography>
-          <Box display='flex' alignItems='center' justifyContent='center'>
-            <TextField
-              fullWidth
-              align='center'
-              type='text'
-              id='new-todo-input'
-              className='input input__lg'
-              autoComplete='off'
-              size='lg'
-            />
-            <Button type='submit' className={classes.buttonStyle}>
-              Add
-            </Button>
-          </Box>
-        </FormControl>
-        <Box display='flex' alignItems='center' justifyContent='center'>
-          <Button type='button' aria-pressed='true' className='btn toggle-btn'>
-            <span className='visually-hidden'>Show</span>
-            <span className='visually-hidden'>Tasks</span>
-          </Button>
-          <Button type='button' aria-pressed='false' className='btn toggle-btn'>
-            <span className='visually-hidden'>Show</span>
-            <span className='visually-hidden'>Tasks</span>
-          </Button>
-          <Button type='button' aria-pressed='false' className='btn toggle-btn'>
-            <span className='visually-hidden'>Show</span>
-            <span className='visually-hidden'>Tasks</span>
-          </Button>
-        </Box>
-        <Typography variant='h2' id='list-heading' align='center'>
+        <Typography variant='h4' align='center' className={classes.h4}>
+          What needs to be done?
+        </Typography>
+        <InputTasks></InputTasks>
+        <Typography variant='h3' align='center' className={classes.h3}>
           3 tasks remaining
         </Typography>
-        <List component='nav' aria-label='main mailbox folders'>
-          <ListItem button>
-            <ListItemText primary='X' />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText primary='X' />
-          </ListItem>
-        </List>
-        <Divider />
-        <List component='nav' aria-label='secondary mailbox folders'>
-          <ListItem button>
-            <ListItemText primary='X' />
-          </ListItem>
-        </List>
-      </Container>
-    </div>
+        <Todo task='Eat'></Todo>
+        <Todo task='Sleep'></Todo>
+        <Todo task='Repeat'></Todo>
+      </div>
+    </Container>
   );
 }
