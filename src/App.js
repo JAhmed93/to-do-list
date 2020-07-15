@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Form from './Components/Form';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/styles';
+import Box from '@material-ui/core/Box';
+import FilterButton from './Components/FilterButton';
 
 const useStyles = makeStyles({
   root: {
@@ -17,13 +19,19 @@ const useStyles = makeStyles({
   h4: {
     margin: '1.5rem',
   },
+  boxStyle: {
+    width: '100%',
+    display: 'flex',
+    marginBottom: '3rem',
+    justifyContent: 'center',
+  },
 });
 
 export default function App(props) {
   const classes = useStyles();
   //rendering components iteratively
   const taskList = props.tasks.map((task) => (
-    <Todo id={task.id} name={task.name} />
+    <Todo id={task.id} name={task.name} key={task.id} />
   ));
   return (
     <Container maxWidth='md' className={classes.root}>
@@ -35,6 +43,11 @@ export default function App(props) {
           What needs to be done?
         </Typography>
         <Form />
+        <Box className={classes.boxStyle}>
+          <FilterButton name='All'></FilterButton>
+          <FilterButton name='Active'></FilterButton>
+          <FilterButton name='Completed'></FilterButton>
+        </Box>
         <Typography variant='h3' align='center' className={classes.h3}>
           3 tasks remaining
         </Typography>

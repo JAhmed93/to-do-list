@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import FilterButton from './FilterButton';
+import AddButton from './AddButton';
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 
@@ -10,29 +11,18 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    width: '100%',
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: '70%',
+    width: '90%',
   },
-  inputButton: {
-    width: '70%',
-    margin: '3rem',
-    background: '#673ab7',
-    color: 'white',
-  },
-  boxStyle: {
-    width: '70%',
+  form: {
     display: 'flex',
-    marginBottom: '3rem',
-  },
-  boxButtons: {
-    background: '#673ab7',
-    width: '33%',
-    color: 'white',
-    padding: '10px',
-    margin: '10px',
+    width: '100%',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
 }));
 
@@ -41,7 +31,7 @@ export default function LayoutTextFields() {
 
   return (
     <div className={classes.root}>
-      <form className={classes.root}>
+      <form className={classes.form}>
         <TextField
           className={classes.textField}
           id='standard-full-width'
@@ -53,18 +43,12 @@ export default function LayoutTextFields() {
             shrink: true,
           }}
         />
-        <Button
+        <AddButton
           variant='contained'
           color='primary'
           className={classes.inputButton}
-        >
-          Add
-        </Button>
-        <Box className={classes.boxStyle}>
-          <Button className={classes.boxButtons}>All</Button>
-          <Button className={classes.boxButtons}>Active</Button>
-          <Button className={classes.boxButtons}>Completed</Button>
-        </Box>
+          name='Add'
+        ></AddButton>
       </form>
     </div>
   );
