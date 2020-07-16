@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import FilterButton from './FilterButton';
 import AddButton from './AddButton';
-import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,12 +23,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LayoutTextFields() {
+export default function Form(props) {
   const classes = useStyles();
+
+  const [name, setName] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert('Hello, world!');
+    props.addTask(name);
+    setName('');
+  }
+
+  function handleChange(e) {
+    setName(e.target.value);
+  }
 
   return (
     <div className={classes.root}>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={handleSubmit}>
         <TextField
           className={classes.textField}
           id='standard-full-width'
@@ -42,12 +52,15 @@ export default function LayoutTextFields() {
           InputLabelProps={{
             shrink: true,
           }}
+          value={name}
+          onChange={handleChange}
         />
         <AddButton
           variant='contained'
           color='primary'
           className={classes.inputButton}
           name='Add'
+          clicked={handleSubmit}
         ></AddButton>
       </form>
     </div>

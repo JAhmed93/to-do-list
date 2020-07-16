@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 const AddButton = (props) => {
   const classes = useStyles();
   return (
-    <Button aria-pressed='true' className={classes.inputButton}>
+    <Button className={classes.inputButton} onClick={props.clicked}>
       {props.name}{' '}
     </Button>
   );
