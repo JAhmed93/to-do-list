@@ -8,6 +8,14 @@ import Box from '@material-ui/core/Box';
 import FilterButton from './Components/FilterButton';
 import { nanoid } from 'nanoid';
 
+const FILTER_MAP = {
+  All: () => true,
+  Active: (task) => !task.checked,
+  Completed: (task) => task.checked,
+};
+
+const FILTER_NAMES = Object.keys(FILTER_MAP);
+
 const useStyles = makeStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -30,6 +38,7 @@ const useStyles = makeStyles({
 
 export default function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
+  const [filter, setFilter] = useState('All');
 
   function addTask(name) {
     const newTask = { id: 'todo-' + nanoid(), name: name, checked: false };
@@ -64,15 +73,26 @@ export default function App(props) {
   };
 
   //rendering components iteratively
-  const taskList = tasks.map((task) => (
-    <Todo
-      id={task.id}
-      name={task.name}
-      key={task.id}
-      checked={task.checked}
-      toggleTaskCompleted={toggleTaskCompleted}
-      deleteTask={deleteTask}
-      editTask={editTask}
+  const taskList = tasks
+    .filter(FILTER_MAP[filter])
+    .map((task) => (
+      <Todo
+        id={task.id}
+        name={task.name}
+        key={task.id}
+        checked={task.checked}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        editTask={editTask}
+      />
+    ));
+
+  const filterList = FILTER_NAMES.map((name) => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter}
     />
   ));
 
@@ -89,11 +109,7 @@ export default function App(props) {
           What needs to be done?
         </Typography>
         <Form addTask={addTask} />
-        <Box className={classes.boxStyle}>
-          <FilterButton name='All'></FilterButton>
-          <FilterButton name='Active'></FilterButton>
-          <FilterButton name='Completed'></FilterButton>
-        </Box>
+        <Box className={classes.boxStyle}>{filterList}</Box>
         <Typography variant='h3' align='center' className={classes.h3}>
           {headingText}
         </Typography>

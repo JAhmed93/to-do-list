@@ -21,7 +21,11 @@ const useStyles = makeStyles((theme) => ({
 const FilterButton = (props) => {
   const classes = useStyles();
   return (
-    <Button aria-pressed='true' className={classes.boxButtons}>
+    <Button
+      aria-pressed={props.isPressed}
+      className={classes.boxButtons}
+      onClick={() => props.setFilter(props.name)}
+    >
       {props.name}{' '}
     </Button>
   );
